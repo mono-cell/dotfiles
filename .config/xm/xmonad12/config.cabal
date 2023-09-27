@@ -1,0 +1,49 @@
+name:                config
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            ""
+license:             BSD3
+license-file:        LICENSE
+author:              Carter S. Levinson
+maintainer:          cslevo@posteo.net
+copyright:           2023 Carter S. Levinson
+category:            Desktop
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+executable xmonad
+  hs-source-dirs:      ./
+  main-is:             xmonad.hs
+  default-language:    Haskell2010
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  build-depends:       base >= 4.7 && < 5,
+                       xmonad,
+                       xmonad-contrib,
+                       containers,
+                       text
+
+executable xmobar-test
+ hs-source-dirs:       ./
+ ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+ main-is:              xmobarrc.hs
+ default-language:     Haskell2010
+ build-depends:        base >= 4.7 && < 5,
+                       xmobar
+
+executable xmobar-0
+  hs-source-dirs:      ./
+  main-is:             xmobarrc-0.hs
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5,
+                       xmobar
+
+executable xmobar-1
+  hs-source-dirs:      ./
+  main-is:             xmobarrc-1.hs
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5,
+                       xmobar

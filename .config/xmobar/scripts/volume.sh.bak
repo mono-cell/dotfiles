@@ -1,0 +1,18 @@
+#!/bin/bash
+
+for a in volume
+do
+    a="pamixer --get-volume-human"
+    #b="pamixer --get-volume"
+    if [ $($a) == "muted" ]; then
+        echo "<fc=#000000,orange:0> Muted [Toggled] </fc> " &
+    fi
+    if [ $($a) == "0%" ]; then
+        echo "<fc=#000000,orange:0> Muted </fc> " &
+    fi
+    #notify-send --urgency=normal -i audio-speakers "Volume: $($b)%"
+    echo "<fc=#000000,green:0> Volume: </fc><fc=green,#262626> $($a) </fc> " &
+done
+
+
+#echo "<fc=#26f60e>Volume:</fc> $(pamixer --get-volume-human) " &

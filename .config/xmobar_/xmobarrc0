@@ -1,0 +1,28 @@
+Config {
+
+   -- appearance
+     font =         "xft:Ubuntu Nerd Font:size=9:antialias=true:hinting=true"
+   , additionalFonts = [
+                         "xft:JoyPixels:size=9:antialias=true:hinting=true"
+                         ,"xft:FontAwesome:size=9:antialias=true:hinting=true"
+                       ]
+   , bgColor =      "#282828"
+   , fgColor =      "#ebdbb2"
+   , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 20 }
+   , border =       BottomB
+   , borderColor =  "#282828"
+   , iconRoot = "."
+   , sepChar =  "%"   -- delineator between plugin names and straight text
+   , alignSep = "}{"  -- separator between left-right alignment
+   , template = "%UnsafeStdinReader%}{%/home/jk/.config/xmobar/bin/xmobarstatus2%"
+   , lowerOnStart =     False    -- send to bottom of window stack on start
+   , hideOnStart =      False   -- start with window unmapped (hidden)
+   , allDesktops =      True    -- show on all desktops
+   , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+   , pickBroadest =     False   -- choose widest display (multi-monitor)
+   , persistent =       False    -- enable/disable hiding (True = disabled)
+   , commands =
+        [ Run Com "xmobarstatus2" [] "" 10
+        , Run UnsafeStdinReader
+        ]
+   }

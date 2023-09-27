@@ -1,0 +1,21 @@
+{
+  "workspace": [
+    {
+      "path": "/home/jk",
+      "mainwin": {
+        "x": 22,
+        "y": 46,
+        "w": 1034,
+        "h": 1034,
+        "state": "Normal",
+        "BackgroundComposition": "none",
+        "CustomTitleBar": false
+      }
+    }
+  ],
+  "Logging": null,
+  "Default": {
+    "w": 800,
+    "h": 600
+  }
+}

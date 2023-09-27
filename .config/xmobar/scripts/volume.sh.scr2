@@ -1,0 +1,18 @@
+#!/bin/ksh
+
+iconmute=""
+iconvol_off=""
+iconvol_low=""
+iconvol_high=""
+volprcnt="pamixer --get-volume-human | sed 's/%//g;s/\ //g'"
+execvol=$(eval $volprcnt)
+if [[ "${execvol}" -eq "muted" ]]; then
+    echo "<fc=black,orange:0> $iconmute Muted: 0% </fc> "
+fi
+if [[ "${execvol}" -ge 40 ]]; then
+    echo "<fc=black,#67EC67:0> $iconvol_high </fc><fc=black,#67EC67:0>$execvol% </fc> "
+else
+    echo "<fc=black,#67EC67:0> $iconvol_low </fc><fc=black,#67EC67:0>$execvol% </fc> "
+fi
+
+exit 0 &

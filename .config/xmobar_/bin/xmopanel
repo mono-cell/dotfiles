@@ -1,0 +1,68 @@
+#!/bin/bash
+
+good="<box type=Bottom width=2 mt=2 color=#76946A><fc=#76946A>"
+bad="<box type=Bottom width=2 mt=2 color=#DCA561><fc=#DCA561>"
+ugly="<box type=Bottom width=2 mt=2 color=#C34043><fc=#C34043> "
+end=" </fc></box>"
+
+# Battery
+bat_stat=$(upower -i $(upower -e | rg battery | head -1)| rg state)
+percent=$(upower -i $(upower -e | rg battery | head -1)| rg percent | rg -o -e "[0-9]{1,3}")
+if [[ "$bat_stat" == *"discharging"* ]]; then
+    if   ((0<=percent && percent<10)); then
+        bat_icon="$ugly$end"
+    elif ((10<=percent && percent<20)); then
+        bat_icon="$ugly$end"
+    elif ((20<=percent && percent<30)); then
+        bat_icon="$bad$end"
+    elif ((30<=percent && percent<40)); then
+        bat_icon="$bad$end"
+    elif ((40<=percent && percent<50)); then
+        bat_icon="$bad$end"
+    elif ((50<=percent && percent<60)); then
+        bat_icon="$bad$end"
+    elif ((60<=percent && percent<70)); then
+        bat_icon="$good$end"
+    elif ((70<=percent && percent<80)); then
+        bat_icon="$good$end"
+    elif ((80<=percent && percent<90)); then
+        bat_icon="$good$end"
+    elif ((90<=percent && percent<=100)); then
+        bat_icon="$good$end"
+    fi
+elif [[ "$bat_stat" == *"charg"* ]]; then
+    if   ((0<=percent && percent<10)); then
+        bat_icon="$bad$end"
+    elif ((10<=percent && percent<20)); then
+        bat_icon="$bad$end"
+    elif ((20<=percent && percent<30)); then
+        bat_icon="$bad$end"
+    elif ((30<=percent && percent<40)); then
+        bat_icon="$bad$end"
+    elif ((40<=percent && percent<50)); then
+        bat_icon="$bad$end"
+    elif ((50<=percent && percent<60)); then
+        bat_icon="$good$end"
+    elif ((60<=percent && percent<70)); then
+        bat_icon="$good$end"
+    elif ((70<=percent && percent<80)); then
+        bat_icon="$good$end"
+    elif ((80<=percent && percent<90)); then
+        bat_icon="$good$end"
+    elif ((90<=percent && percent<98)); then
+        bat_icon="$good$end"
+    else
+        bat_icon="$good$end"
+    fi
+elif [[ "$bat_stat" == *"full"* ]]; then
+    bat_icon="$good$end"
+else
+    bat_icon="$bad$end"
+fi
+
+men_icon="$good   $end"
+
+men=$(free -h --mega | sed -n '2{p;q}' | awk '{printf $3}')
+bat=$bat_icon
+
+echo "󰒔 $men  $bat"

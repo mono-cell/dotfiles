@@ -1,0 +1,14 @@
+conky.config={
+background=false,
+out_to_console=true,
+out_to_x=false,
+update_interval=1.0,
+use_spacer="none",
+}
+
+conky.text = [[
+^bg(\#575757)^fg(\#66FF66)\
+ ${exec playerctl get-active} \
+^fg(\#333333)^fg()^bg() \
+${exec playerctl metadata --format "{{artist}} - {{title}} ({{status}})"}
+]]

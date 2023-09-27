@@ -1,0 +1,22 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           xmobar-atif
+version:        0.16
+synopsis:       My xmonad configuration.
+homepage:       https://github.com/AtifChy/xmonad
+author:         Atif
+maintainer:     Atif
+license:        MIT
+build-type:     Simple
+
+executable xmobar
+  main-is: xmobar.hs
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -O2 -j -dynamic -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , xmobar
+  default-language: Haskell2010

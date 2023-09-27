@@ -1,0 +1,129 @@
+#! /bin/sh
+
+source $(dirname $0)/config
+
+if xdo id -a "$WM_NAME" > /dev/null ; then
+    printf "%s\n" "The panel is already running." >&2
+    exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $HEIGHT
+bspc subscribe |\
+    grep -oE "[Mm][^TM]*[TML]" --line-buffered |\
+    while read line; do echo W$line; done > "$PANEL_FIFO" &
+
+# Top left
+{
+    getName() {
+        local ic=$(pIconUnderline ${WHITE2} ${BLUE2} ${GENTOO})
+        local cmd="$(uname -n)"
+        local clr=$(pTextUnderline ${WHITE} ${BLUE} " ${cmd}")
+        echo " ${ic}${clr}"
+    }
+
+    while :; do
+        echo "T$(getName) "
+        sleep 5
+    done
+
+} > "$PANEL_FIFO" &
+
+# Top Right
+{
+    getDay() {
+        local icon=$(pIconUnderline ${RED} ${BLUE2} ${CTIME})
+        local cmd=" $(date '+%A %d %b')"
+        local clr=$(pTextUnderline ${WHITE} ${BLUE} "${cmd}")
+        echo "${icon}${clr}"
+    }
+
+    clock() {
+        local icon=$(pIcon ${RED} ${CCLOCK})
+        local cmd=$(date +%H:%M)
+        local clr=$(pText ${FG} "${cmd}")
+        echo "${icon} ${clr}"
+    }
+
+    energy() {
+        local ac=/sys/class/power_supply/AC/online
+        local bat=/sys/class/power_supply/BAT0/present
+        local icon=""
+        local batCap=""
+        if [[ -e $bat ]] && [[ $(cat $ac) -lt 1 ]]; then
+            batCap="$(cat ${bat%/*}/capacity)"
+            [ $batCap -gt 90 ] && icon=$BAT100
+            [ $batCap -gt 70 ] && [ $batCap -lt 90 ] && icon=$BAT70
+            [ $batCap -gt 50 ] && [ $batCap -lt 70 ] && icon=$BAT50
+            [ $batCap -gt 30 ] && [ $batCap -lt 50 ] && icon=$BAT30
+            [ $batCap -gt 15 ] && [ $batCap -lt 30 ] && icon=$BAT15
+            [ $batCap -lt 7 ] && icon=$BAT7
+        elif [[ -n $(cat $ac) ]]; then
+            batCap="AC"
+            icon=$CAC
+        else
+            batCap="wttf"
+        fi
+        echo "$(pIcon ${RED} $icon) $(pText "#685667" ${batCap})"
+    }
+
+    ram() {
+        local icon=$(pIcon ${RED} ${CRAM})
+        local cmd=$(free -m | grep Mem | awk '{print $3}')
+        cmd+=" Mb"
+        local clr=$(pText ${FG} "${cmd}")
+        echo "${icon} ${clr}"
+    }
+
+    # Cpu List Load, number of Process and actual MHz frequency.
+    cpu() {
+        local icon=$(pIconUnderline ${RED} ${BLUE2} ${CCPU})
+        local cmd=" $(cat /proc/loadavg | awk '{print $1}')"
+        local cmd+=" $(cat /proc/loadavg | awk '{print $4}')"
+        local cmd+=" $(cat /proc/cpuinfo| grep MHz | awk '{ORS=" "}{print $4}' | sed -e 's/.000//g' | cut -f 1)"
+
+        local clr=$(pTextUnderline ${WHITE} ${BLUE} "${cmd}")
+        echo "${icon}${clr}"
+    }
+
+    # On archlinux, change cmd=$(pacman -Ql | wc -l), or remove it complety.
+    package() {
+        local icon=$(pIcon ${GREEN} ${CPACK})
+        local cmd=$(chechupdates | wc -l)
+        local clr=$(pText ${MAGENTA} "${cmd}")
+        echo "${icon} ${clr}"
+    }
+
+    while :; do
+        echo "S$(package) $(cpu) $(ram) $(energy) $(clock) $(getDay)"
+        sleep 5
+    done
+
+} > "$PANEL_FIFO" &
+
+$(dirname $0)/panel_bar < "$PANEL_FIFO" | lemonbar \
+    -a 32 \
+    -n "$WM_NAME" \
+    -g x$HEIGHT \
+    -u 2 \
+    -f "$FONT" \
+    -f "$FONT_ICON" \
+    -F "$FG" \
+    -B "#ab101E29" | sh | while read line; do eval "$line"; done &
+
+wid=$(xdo id -a "$WM_NAME")
+tries_left=20
+
+while [ -z "$wid" -a "$tries_left" -gt 0 ] ; do
+	sleep 0.05
+	wid=$(xdo id -a "$WM_NAME")
+	tries_left=$((tries_left - 1))
+done
+
+[ -n "$wid" ] && xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+
+wait

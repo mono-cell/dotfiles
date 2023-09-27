@@ -1,0 +1,47 @@
+2023-09-27T21:16:27.373Z - info: [ui] [AppStore] loading 0 repositories from store
+2023-09-27T21:16:27.450Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:16:27.467Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:16:27.470Z - info: [ui] launching: 3.3.1-linux1 (Linux 6.5.5-zen1-1-zen)
+2023-09-27T21:16:27.471Z - info: [ui] execPath: '/opt/github-desktop/github-desktop'
+2023-09-27T21:16:27.521Z - info: [ui] Opt in reported.
+2023-09-27T21:16:27.608Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:16:30.325Z - info: [ui] [Welcome] advancing to step: SignInToDotComWithBrowser
+2023-09-27T21:16:30.329Z - info: [ui] [SignInStore] initializing OAuth flow
+2023-09-27T21:16:30.337Z - info: [main] opening in browser: https://github.com/login/oauth/authorize?client_id=3a723b10ac5575cc5bb9&scope=repo%20user%20workflow&state=00ad11ea-0ca6-4371-893f-ababe36bb631
+2023-09-27T21:16:30.338Z - info: [ui] [Welcome] current sign in state not found. ignoring...
+2023-09-27T21:16:30.570Z - info: [ui] [Welcome] kind Authentication is the same as Authentication. ignoring...
+2023-09-27T21:17:03.890Z - info: [main] Received possible protocol arguments: 3
+2023-09-27T21:17:03.891Z - info: [main] Processing protocol url
+2023-09-27T21:17:03.892Z - info: [ui] [Dispatcher] requesting authenticated user
+2023-09-27T21:17:03.906Z - info: [ui] [Welcome] kind Authentication is the same as Authentication. ignoring...
+2023-09-27T21:17:04.004Z - info: [main] Received possible protocol arguments: 2
+2023-09-27T21:17:04.009Z - info: [main] Processing protocol url
+2023-09-27T21:17:04.489Z - info: [ui] [SignInStore] account resolved
+2023-09-27T21:17:04.491Z - info: [ui] [AppStore] adding account mono-cell (mono-cell) to store
+2023-09-27T21:17:04.502Z - info: [ui] [Welcome] advancing to step: ConfigureGit
+2023-09-27T21:17:04.561Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:17:04.695Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:17:21.933Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:17:21.950Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:17:22.087Z - info: [ui] [Welcome] no sign in step found. ignoring...
+2023-09-27T21:17:22.119Z - info: [ui] Subscribed 'mono-cell' to Alive channel
+2023-09-27T21:18:10.553Z - info: [ui] [AppStore] adding repository at /home/jk/GitHub/dotfiles to store
+2023-09-27T21:18:38.200Z - info: [ui] [RepositoryIndicatorUpdater]: Refreshing sidebar indicators for 1 repositories took 0.0s of which 0.0s paused, total 0.0s
+2023-09-27T21:18:47.442Z - info: [ui] [BranchPruner] No branches to prune.
+2023-09-27T21:19:59.477Z - info: [ui] [AppStore.withAuthenticatingUser] account found for repository: dotfiles - mono-cell (has token)
+2023-09-27T21:35:17.744Z - info: [ui] [AppStore] loading 1 repositories from store
+2023-09-27T21:35:17.752Z - info: [ui] [AppStore] found account: mono-cell (mono-cell)
+2023-09-27T21:35:17.802Z - info: [ui] [BranchPruner] Last prune took place 17 minutes ago - skipping
+2023-09-27T21:35:18.176Z - info: [ui] Subscribed 'mono-cell' to Alive channel
+2023-09-27T21:35:18.213Z - info: [ui] launching: 3.3.1-linux1 (Linux 6.5.5-zen1-1-zen)
+2023-09-27T21:35:18.215Z - info: [ui] execPath: '/opt/github-desktop/github-desktop'
+2023-09-27T21:35:18.354Z - info: [ui] Stats reported.
+2023-09-27T21:35:22.274Z - info: [ui] [BranchPruner] Last prune took place 17 minutes ago - skipping
+2023-09-27T21:35:24.438Z - info: [ui] [AppStore.withAuthenticatingUser] account found for repository: dotfiles - mono-cell (has token)
+2023-09-27T21:35:24.619Z - info: [ui] [Timing] Action 'checkout branch from list' for 'mono-cell/dotfiles' took 0.177s
+2023-09-27T21:35:32.685Z - info: [ui] [Timing] Action 'checkout branch from list' for 'mono-cell/dotfiles' took 0.000s
+2023-09-27T21:35:53.275Z - info: [ui] [BranchPruner] Last prune took place 17 minutes ago - skipping
+2023-09-27T21:35:55.228Z - info: [ui] [AppStore.withAuthenticatingUser] account found for repository: dotfiles - mono-cell (has token)
+2023-09-27T21:37:49.963Z - info: [ui] [AppStore] adding repository at /home/jk/test to store
+2023-09-27T21:38:01.419Z - info: [ui] [BranchPruner] No branches to prune.
+2023-09-27T21:38:34.185Z - info: [ui] [BranchPruner] Last prune took place 20 minutes ago - skipping

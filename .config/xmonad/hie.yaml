@@ -1,0 +1,4 @@
+cradle:
+  stack:
+    - path: "./src/main.hs"
+      component: "myXmonad:exe:xmonad"

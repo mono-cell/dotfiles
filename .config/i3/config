@@ -1,0 +1,93 @@
+#
+# Settings
+#
+
+font -*-dina-medium-r-*-*-8-*-*-*-*-*-*-*
+
+set $ws1 mail
+set $ws2 web
+set $ws3 code
+set $ws4 media
+set $ws5 gimp
+set $ws6 focus
+
+set $mod Mod4
+
+gaps inner 18
+gaps outer 33
+
+for_window [class="^.*"] border normal 0
+for_window [class=".*"] title_format " >_ %title "
+
+#                         border  bg      text    indicat child_border
+client.focused            #000000 #0a0b10 #848474 #4F4F4F #000000
+client.focused_inactive   #000000 #0a0b10 #636357 #121212 #000000
+client.unfocused          #000000 #0a0b10 #68685b #4F4F4F #000000
+client.urgent             #000000 #0a0b10 #6c777a #1A1A1A #000000
+client.background         #0a0b10
+
+#
+# Shortcut
+#
+
+bindsym $mod+Shift+C reload
+bindsym $mod+Shift+R restart
+bindsym $mod+Shift+E exit
+bindsym $mod+q kill
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+Tab workspace back_and_forth
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym Ctrl+$mod+l split h
+bindsym Ctrl+$mod+j split v
+
+bindsym $mod+s floating toggle
+
+
+bindsym $mod+d exec /usr/bin/rofi -show run
+bindsym $mod+Return exec /usr/bin/alacritty
+
+bindsym Mod5+F8 exec sudo xbacklight -1
+bindsym Mod5+F9 exec sudo xbacklight +1
+#bindsym Mod5+f exec termite -e ranger
+
+# xprop command for find class name
+for_window [class="Lxappearance"] floating enable
+for_window [class="Sxiv|feh"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="XFontSel"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="Abiword"] floating enable
+for_window [class="Zathura"] floating enable
+for_window [class="Vivaldi-stable"] border pixel 1
+
+assign [class="Vivaldi-stable"] → $ws2
+assign [class="Gimp"] → $ws5
+
+#
+# Exec
+#
+
+# Polybar top
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Lemonbar top & bottom
+exec_always --no-startup-id killall lemonbar; sh ~/.config/i3/panel-top.sh &
+exec_always --no-startup-id killall lemonbar; sh ~/.config/i3/panel-bottom.sh &
